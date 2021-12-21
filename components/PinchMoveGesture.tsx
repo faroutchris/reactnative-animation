@@ -1,23 +1,14 @@
-import React, { useRef, useState } from "react";
-import {
-  Alert,
-  StyleProp,
-  StyleSheet,
-  TouchableHighlight,
-  TouchableNativeFeedback,
-  TouchableOpacity,
-} from "react-native";
+import React from "react";
+import { StyleProp } from "react-native";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
-import Animated, {
+import {
   useAnimatedStyle,
   useSharedValue,
   withDecay,
   withSpring,
 } from "react-native-reanimated";
-import Card, { Cards } from "./Card";
-import { View, Text } from "./Themed";
 
-function CardGesture({
+function PinchMoveGesture({
   children,
 }: {
   children: (
@@ -86,54 +77,4 @@ function CardGesture({
   );
 }
 
-export default () => {
-  const reset = useRef(() => {});
-  return (
-    <View style={styles.container}>
-      <TouchableOpacity onPress={reset.current}>
-        <View style={styles.btn}>
-          <Text style={styles.btnText}>Reset</Text>
-        </View>
-      </TouchableOpacity>
-      <CardGesture>
-        {(animatedStyle: StyleProp<any>, _reset) => {
-          reset.current = _reset;
-          return (
-            <Animated.View style={animatedStyle}>
-              <View style={styles.card}>
-                <Card card={Cards.Card2} />
-              </View>
-            </Animated.View>
-          );
-        }}
-      </CardGesture>
-    </View>
-  );
-};
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-  },
-  card: {
-    borderRadius: 16,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 3,
-    },
-    shadowOpacity: 0.29,
-    shadowRadius: 4.65,
-    elevation: 7,
-  },
-  btn: {
-    backgroundColor: "#e68075",
-    paddingHorizontal: 40,
-    paddingVertical: 15,
-    borderRadius: 30,
-  },
-  btnText: {
-    color: "white",
-  },
-});
+export default PinchMoveGesture;

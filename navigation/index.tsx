@@ -89,7 +89,7 @@ function BottomTabNavigator() {
         name="TabOne"
         component={TabOneScreen}
         options={({ navigation }: RootTabScreenProps<"TabOne">) => ({
-          tabBarLabel: (props) => (
+          tabBarLabel: () => (
             <BodyText style={{ fontSize: 10 }}>Tab One</BodyText>
           ),
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
@@ -120,7 +120,7 @@ function BottomTabNavigator() {
           headerTitle: () => (
             <HeadingText style={{ fontSize: 16 }}>Tab Two</HeadingText>
           ),
-          tabBarLabel: (props) => (
+          tabBarLabel: () => (
             <BodyText style={{ fontSize: 10 }}>Tab One</BodyText>
           ),
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
