@@ -51,10 +51,7 @@ function DismissGesture({
     })
     .onEnd((event) => {
       if (event.translationX > THRESHOLD) {
-        opacity.value = withTiming(0, {
-          duration: 1,
-          easing: Easing.ease,
-        });
+        opacity.value = withTiming(0);
         offsetX.value = withSpring(
           Layout.window.width,
           {
@@ -64,14 +61,11 @@ function DismissGesture({
           },
           (isFinished) => {
             if (isFinished) {
-              itemHeightVal.value = withTiming(0, undefined, (isFinished2) => {
-                if (isFinished2) {
-                  runOnJS(onDismiss)();
-                }
-              });
+              runOnJS(onDismiss)();
             }
           }
         );
+        itemHeightVal.value = withTiming(0);
       } else {
         opacity.value = withSpring(0);
         offsetX.value = withSpring(0, {

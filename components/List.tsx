@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
-import Animated from "react-native-reanimated";
+import Animated, { FadeIn, FadeInLeft } from "react-native-reanimated";
 import { FontAwesome5 } from "@expo/vector-icons";
 import DismissGesture from "./DismissGesture";
+import { View, Text } from "./Themed";
 
 const COLORS = [
   "#FFAEBC",
@@ -24,9 +25,22 @@ function List() {
     setColors(colors.filter((_col) => color !== _col));
   };
 
+  const reset = () => {
+    setColors(COLORS);
+  };
+
   return (
     <ScrollView style={styles.wrapper}>
-      {colors.map((color) => (
+      {colors.length === 0 && (
+        <Animated.View entering={FadeIn.duration(700)}>
+          <TouchableOpacity onPress={reset}>
+            <View style={styles.btn}>
+              <Text style={styles.btnText}>Reset</Text>
+            </View>
+          </TouchableOpacity>
+        </Animated.View>
+      )}
+      {colors.map((color, index) => (
         <DismissGesture
           key={color}
           itemHeight={ITEM_HEIGHT}
@@ -34,9 +48,12 @@ function List() {
         >
           {(cardAnimatedStyle, btnAnimatatedStyle, wrapperAnimatedStyle) => {
             return (
-              <Animated.View style={[wrapperAnimatedStyle, styles.itemWrapper]}>
+              <Animated.View
+                style={[wrapperAnimatedStyle, styles.itemWrapper]}
+                entering={FadeInLeft.duration(400).delay(index * 100)}
+              >
                 <Animated.View style={[btnAnimatatedStyle, styles.itemDelete]}>
-                  <FontAwesome5 name="trash-alt" color="red" size={40} />
+                  <FontAwesome5 name="trash-alt" color="red" size={32} />
                 </Animated.View>
 
                 <Animated.View
@@ -59,6 +76,7 @@ const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
     padding: 10,
+    backgroundColor: "#fff",
   },
   itemWrapper: {
     position: "relative",
@@ -83,6 +101,15 @@ const styles = StyleSheet.create({
     height: ITEM_HEIGHT - 20,
     marginVertical: 10,
     borderRadius: 16,
+  },
+  btn: {
+    backgroundColor: "#e68075",
+    paddingHorizontal: 40,
+    paddingVertical: 15,
+    borderRadius: 30,
+  },
+  btnText: {
+    color: "white",
   },
 });
 
