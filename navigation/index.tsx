@@ -20,6 +20,7 @@ import useColorScheme from "../hooks/useColorScheme";
 import ModalScreen from "../screens/ModalScreen";
 import NotFoundScreen from "../screens/NotFoundScreen";
 import TabOneScreen from "../screens/TabOneScreen";
+import TabThreeScreen from "../screens/TabThreeScreen";
 import TabTwoScreen from "../screens/TabTwoScreen";
 import {
   RootStackParamList,
@@ -121,9 +122,23 @@ function BottomTabNavigator() {
             <HeadingText style={{ fontSize: 16 }}>Tab Two</HeadingText>
           ),
           tabBarLabel: () => (
-            <BodyText style={{ fontSize: 10 }}>Tab One</BodyText>
+            <BodyText style={{ fontSize: 10 }}>Tab Two</BodyText>
           ),
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+        }}
+      />
+      <BottomTab.Screen
+        name="TabThree"
+        component={TabThreeScreen}
+        options={{
+          headerTitle: () => null,
+          headerShown: false,
+          tabBarLabel: () => (
+            <BodyText style={{ fontSize: 10 }}>Carousel</BodyText>
+          ),
+          tabBarIcon: ({ color }) => (
+            <TabBarIcon name="bathtub" color={color} />
+          ),
         }}
       />
     </BottomTab.Navigator>

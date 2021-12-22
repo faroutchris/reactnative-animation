@@ -36,6 +36,18 @@ function DismissGesture({
   const opacity = useSharedValue(0);
   const itemHeightVal = useSharedValue(itemHeight);
 
+  // config
+  const springConfigDismiss = {
+    stiffness: 250,
+    damping: 10,
+    mass: 0.3,
+  };
+
+  const springConfigCancel = {
+    stiffness: 250,
+    damping: 25,
+  };
+
   const panGesture = Gesture.Pan()
     .onUpdate((event) => {
       offsetX.value = clamp(
@@ -43,35 +55,24 @@ function DismissGesture({
         0,
         Layout.window.width
       );
-      opacity.value = interpolate(
-        event.translationX,
-        [0, 30, THRESHOLD],
-        [0, 0, 1]
-      );
+      opacity.value = interpolate(event.translationX, [0, THRESHOLD], [0, 1]);
     })
     .onEnd((event) => {
       if (event.translationX > THRESHOLD) {
         opacity.value = withTiming(0);
+        itemHeightVal.value = withTiming(0);
         offsetX.value = withSpring(
           Layout.window.width,
-          {
-            stiffness: 250,
-            damping: 10,
-            mass: 0.3,
-          },
-          (isFinished) => {
-            if (isFinished) {
+          springConfigDismiss,
+          (finished) => {
+            if (finished) {
               runOnJS(onDismiss)();
             }
           }
         );
-        itemHeightVal.value = withTiming(0);
       } else {
-        opacity.value = withSpring(0);
-        offsetX.value = withSpring(0, {
-          stiffness: 250,
-          damping: 25,
-        });
+        opacity.value = withTiming(0);
+        offsetX.value = withSpring(0, springConfigCancel);
       }
     });
 

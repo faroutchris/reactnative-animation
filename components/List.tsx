@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
   },
   itemDelete: {
     position: "absolute",
-    top: 28,
+    top: 32,
     left: 10,
     color: "red",
   },
