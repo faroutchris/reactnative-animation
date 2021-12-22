@@ -13,7 +13,6 @@ const data = [
   {
     img: require("../assets/images/slides/pineapplelamp.png"),
     bgColor: "#E4C7B8",
-    btnColor: "#B47948",
     height: 300,
     width: 245,
     title: "Miranda Pineapple",
@@ -22,16 +21,22 @@ const data = [
   {
     img: require("../assets/images/slides/bogardearmchair.png"),
     bgColor: "#D8E0E8",
-    btnColor: "#8CA79F",
     height: 300,
     width: 260,
     title: "Bogarde Armchair",
     description: "Perfect for any living room or lobby",
   },
   {
+    img: require("../assets/images/slides/hepburncabinet.png"),
+    bgColor: "#FFF7CE",
+    height: 290,
+    width: 250,
+    title: "Hepburn Cabinet",
+    description: "Inspired by Hollywoods most refined",
+  },
+  {
     img: require("../assets/images/slides/minelliarmchair.png"),
     bgColor: "#527185",
-    btnColor: "#8E959C",
     height: 270,
     width: 300,
     title: "Minelli armchair",
@@ -47,6 +52,7 @@ export enum Slides {
   Slide1 = 0,
   Slide2 = 1,
   Slide3 = 2,
+  Slide4 = 3,
 }
 
 type Props = {

@@ -10,8 +10,6 @@ import {
   useDerivedValue,
   useSharedValue,
   scrollTo,
-  interpolate,
-  Extrapolate,
   useAnimatedStyle,
   interpolateColor,
 } from "react-native-reanimated";
@@ -21,7 +19,7 @@ import Slide, { Slides } from "./Slide";
 import { HeadingText } from "./StyledText";
 import { ScrollView } from "react-native-gesture-handler";
 
-const SLIDES = [Slides.Slide1, Slides.Slide2, Slides.Slide3];
+const SLIDES = [Slides.Slide1, Slides.Slide2, Slides.Slide3, Slides.Slide4];
 
 function Carousel() {
   const scrollRef = useAnimatedRef<ScrollView>();
@@ -33,21 +31,17 @@ function Carousel() {
   });
 
   const onPressNext = (index: number) => {
-    scrollIndex.value =
-      index === SLIDES.length - 1 ? 0 : scrollIndex.value + (index + 1);
+    scrollIndex.value = index === SLIDES.length - 1 ? 0 : scrollIndex.value + 1;
   };
 
   const updateIndex = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
-    scrollIndex.value = interpolate(
-      event.nativeEvent.contentOffset.x,
-      [0, Layout.window.width * (SLIDES.length - 1)],
-      [0, SLIDES.length - 1],
-      Extrapolate.CLAMP
+    scrollIndex.value = Math.floor(
+      event.nativeEvent.contentOffset.x / Layout.window.width
     );
   };
 
   const updatePixelValue = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
-    scrollPixelValue.value = event.nativeEvent.contentOffset.x;
+    scrollPixelValue.value = Math.floor(event.nativeEvent.contentOffset.x);
   };
 
   const backgroundStyles = useAnimatedStyle(() => {
@@ -56,8 +50,13 @@ function Carousel() {
       // https://github.com/software-mansion/react-native-reanimated/issues/2329
       backgroundColor: interpolateColor(
         scrollPixelValue.value,
-        [0, 1 * Layout.window.width, 2 * Layout.window.width],
-        ["#E4C7B8", "#B7D6D0", "#D8E0E8"],
+        [
+          0,
+          1 * Layout.window.width,
+          2 * Layout.window.width,
+          3 * Layout.window.width,
+        ],
+        ["#E4C7B8", "#B7D6D0", "#FFF7CE", "#D8E0E8"],
         "RGB"
       ),
     };
