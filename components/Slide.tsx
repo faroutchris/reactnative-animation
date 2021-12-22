@@ -1,4 +1,4 @@
-import { FontAwesome5 } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
 import React from "react";
 import { StyleSheet, TouchableWithoutFeedback, View } from "react-native";
 import Animated, {
@@ -67,50 +67,43 @@ export default function ({
   scrollPixelValue,
 }: Props) {
   const _slide = data[slide];
+  const inputRange = [
+    (index - 1) * Layout.window.width,
+    index * Layout.window.width,
+    (index + 1) * Layout.window.width,
+  ];
 
   const animatedImageStyles = useAnimatedStyle(() => {
-    const input = [
-      (index - 1) * Layout.window.width,
-      index * Layout.window.width,
-      (index + 1) * Layout.window.width,
-    ];
     const rot = interpolate(
       scrollPixelValue.value,
-      input,
-      [-25, 0, 25],
+      inputRange,
+      [25, 0, -25],
       Extrapolate.CLAMP
     );
     const scale = interpolate(
       scrollPixelValue.value,
-      input,
+      inputRange,
       [0.6, 1, 0.6],
       Extrapolate.CLAMP
     );
-
     return {
       transform: [{ rotateZ: `${rot}deg` }, { scale }],
     };
   });
 
   const animatedTitleStyles = useAnimatedStyle(() => {
-    const input = [
-      (index - 1) * Layout.window.width,
-      index * Layout.window.width,
-      (index + 1) * Layout.window.width,
-    ];
     const opacity = interpolate(
       scrollPixelValue.value,
-      input,
+      inputRange,
       [0, 1, 0],
       Extrapolate.CLAMP
     );
     const translateX = interpolate(
       scrollPixelValue.value,
-      input,
+      inputRange,
       [-100, 0, -100],
       Extrapolate.CLAMP
     );
-
     return {
       opacity,
       transform: [{ translateX }],
@@ -118,24 +111,18 @@ export default function ({
   });
 
   const animatedDescStyles = useAnimatedStyle(() => {
-    const input = [
-      (index - 1) * Layout.window.width,
-      index * Layout.window.width,
-      (index + 1) * Layout.window.width,
-    ];
     const opacity = interpolate(
       scrollPixelValue.value,
-      input,
+      inputRange,
       [0, 1, 0],
       Extrapolate.CLAMP
     );
     const translateX = interpolate(
       scrollPixelValue.value,
-      input,
+      inputRange,
       [100, 0, 100],
       Extrapolate.CLAMP
     );
-
     return {
       opacity,
       transform: [{ translateX }],
@@ -143,14 +130,9 @@ export default function ({
   });
 
   const animateIndexStyles = useAnimatedStyle(() => {
-    const input = [
-      (index - 1) * Layout.window.width,
-      index * Layout.window.width,
-      (index + 1) * Layout.window.width,
-    ];
     const opacity = interpolate(
       scrollPixelValue.value,
-      input,
+      inputRange,
       [0, 1, 0],
       Extrapolate.CLAMP
     );
@@ -178,8 +160,8 @@ export default function ({
           {_slide.description}
         </Animated.Text>
         <TouchableWithoutFeedback onPress={() => onPressNext(index)}>
-          <View style={[styles.pager, { backgroundColor: _slide.btnColor }]}>
-            <FontAwesome5 name="arrow-right"></FontAwesome5>
+          <View style={[styles.pager]}>
+            <AntDesign name="arrowright" size={30}></AntDesign>
           </View>
         </TouchableWithoutFeedback>
       </Animated.View>
@@ -214,14 +196,13 @@ const styles = StyleSheet.create({
   desc: {
     fontSize: 16,
     fontFamily: "inter-xlight",
-    marginBottom: 60,
+    marginBottom: 40,
   },
   pager: {
     width: 60,
     height: 60,
-    borderRadius: 100,
     alignItems: "center",
     justifyContent: "center",
-    alignSelf: "center",
+    alignSelf: "flex-end",
   },
 });
