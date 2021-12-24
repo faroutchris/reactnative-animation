@@ -18,6 +18,9 @@ declare global {
 
 export type RootStackParamList = {
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
+  PinchGesture: undefined;
+  SwipeDelete: undefined;
+  Carousel: undefined;
   Modal: undefined;
   NotFound: undefined;
 };

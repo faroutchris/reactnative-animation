@@ -19,15 +19,16 @@ import Colors from "../constants/Colors";
 import useColorScheme from "../hooks/useColorScheme";
 import ModalScreen from "../screens/ModalScreen";
 import NotFoundScreen from "../screens/NotFoundScreen";
-import TabOneScreen from "../screens/TabOneScreen";
-import TabThreeScreen from "../screens/TabThreeScreen";
-import TabTwoScreen from "../screens/TabTwoScreen";
+import StartScreen from "../screens/StartScreen";
+import PinchGestureScreen from "../screens/PinchGestureScreen";
+import CarouselScreen from "../screens/CarouselScreen";
 import {
   RootStackParamList,
   RootTabParamList,
   RootTabScreenProps,
 } from "../types";
 import LinkingConfiguration from "./LinkingConfiguration";
+import SwipeDeleteScreen from "../screens/SwipeDeleteScreen";
 
 export default function Navigation({
   colorScheme,
@@ -55,8 +56,23 @@ function RootNavigator() {
     <Stack.Navigator>
       <Stack.Screen
         name="Root"
-        component={BottomTabNavigator}
-        options={{ headerShown: false }}
+        options={{ title: "Start" }}
+        component={StartScreen}
+      />
+      <Stack.Screen
+        name="PinchGesture"
+        component={PinchGestureScreen}
+        options={{ title: "Pinch and pan!" }}
+      />
+      <Stack.Screen
+        name="SwipeDelete"
+        component={SwipeDeleteScreen}
+        options={{ title: "Swipe to delete" }}
+      />
+      <Stack.Screen
+        name="Carousel"
+        component={CarouselScreen}
+        options={{ headerTitle: () => null, headerShown: false }}
       />
       <Stack.Screen
         name="NotFound"
@@ -68,89 +84,4 @@ function RootNavigator() {
       </Stack.Group>
     </Stack.Navigator>
   );
-}
-
-/**
- * A bottom tab navigator displays tab buttons on the bottom of the display to switch screens.
- * https://reactnavigation.org/docs/bottom-tab-navigator
- */
-const BottomTab = createBottomTabNavigator<RootTabParamList>();
-
-function BottomTabNavigator() {
-  const colorScheme = useColorScheme();
-
-  return (
-    <BottomTab.Navigator
-      initialRouteName="TabOne"
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme].tint,
-      }}
-    >
-      <BottomTab.Screen
-        name="TabOne"
-        component={TabOneScreen}
-        options={({ navigation }: RootTabScreenProps<"TabOne">) => ({
-          tabBarLabel: () => (
-            <BodyText style={{ fontSize: 10 }}>Tab One</BodyText>
-          ),
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-          headerTitle: () => (
-            <HeadingText style={{ fontSize: 16 }}>Tab One</HeadingText>
-          ),
-          headerRight: () => (
-            <Pressable
-              onPress={() => navigation.navigate("Modal")}
-              style={({ pressed }) => ({
-                opacity: pressed ? 0.5 : 1,
-              })}
-            >
-              <FontAwesome
-                name="info-circle"
-                size={25}
-                color={Colors[colorScheme].text}
-                style={{ marginRight: 15 }}
-              />
-            </Pressable>
-          ),
-        })}
-      />
-      <BottomTab.Screen
-        name="TabTwo"
-        component={TabTwoScreen}
-        options={{
-          headerTitle: () => (
-            <HeadingText style={{ fontSize: 16 }}>Tab Two</HeadingText>
-          ),
-          tabBarLabel: () => (
-            <BodyText style={{ fontSize: 10 }}>Tab Two</BodyText>
-          ),
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-        }}
-      />
-      <BottomTab.Screen
-        name="TabThree"
-        component={TabThreeScreen}
-        options={{
-          headerTitle: () => null,
-          headerShown: false,
-          tabBarLabel: () => (
-            <BodyText style={{ fontSize: 10 }}>Carousel</BodyText>
-          ),
-          tabBarIcon: ({ color }) => (
-            <TabBarIcon name="bathtub" color={color} />
-          ),
-        }}
-      />
-    </BottomTab.Navigator>
-  );
-}
-
-/**
- * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
- */
-function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>["name"];
-  color: string;
-}) {
-  return <FontAwesome size={30} style={{ marginBottom: -3 }} {...props} />;
 }
