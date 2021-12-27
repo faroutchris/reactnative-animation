@@ -11,11 +11,7 @@ import {
   withTiming,
 } from "react-native-reanimated";
 import Layout from "../constants/Layout";
-
-function clamp(number: number, min: number, max: number): number {
-  "worklet";
-  return Math.max(min, Math.min(number, max));
-}
+import { clamp } from "../libs/AnimationHelpers";
 
 function DismissGesture({
   itemHeight,

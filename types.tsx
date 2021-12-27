@@ -22,6 +22,7 @@ export type RootStackParamList = {
   SwipeDelete: undefined;
   Carousel: undefined;
   Modal: undefined;
+  SwipeToConfirm: undefined;
   NotFound: undefined;
 };
 

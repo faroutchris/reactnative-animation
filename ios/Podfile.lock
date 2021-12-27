@@ -17,6 +17,8 @@ PODS:
     - ExpoModulesCore
   - Expo (44.0.0):
     - ExpoModulesCore
+  - ExpoLinearGradient (11.0.0):
+    - ExpoModulesCore
   - ExpoModulesCore (0.6.3):
     - React-Core
     - ReactCommon/turbomodule/core
@@ -415,6 +417,7 @@ DEPENDENCIES:
   - EXFont (from `../node_modules/expo-font/ios`)
   - EXKeepAwake (from `../node_modules/expo-keep-awake/ios`)
   - Expo (from `../node_modules/expo/ios`)
+  - ExpoLinearGradient (from `../node_modules/expo-linear-gradient/ios`)
   - ExpoModulesCore (from `../node_modules/expo-modules-core/ios`)
   - EXSplashScreen (from `../node_modules/expo-splash-screen/ios`)
   - EXWebBrowser (from `../node_modules/expo-web-browser/ios`)
@@ -515,6 +518,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/expo-keep-awake/ios"
   Expo:
     :path: "../node_modules/expo/ios"
+  ExpoLinearGradient:
+    :path: "../node_modules/expo-linear-gradient/ios"
   ExpoModulesCore:
     :path: "../node_modules/expo-modules-core/ios"
   EXSplashScreen:
@@ -600,6 +605,7 @@ SPEC CHECKSUMS:
   EXFont: 1fb13af43dc517c01c0ff21a6e32f9f9bf2ea602
   EXKeepAwake: b571c2ad8323b2fced6e907766e2549f75119471
   Expo: 6ca1d5ca8c8264a7131a608afcd01561f79f1e6e
+  ExpoLinearGradient: a7f1672e1727fedc4280d56c27606f8e195b9fcc
   ExpoModulesCore: d04e519b3e8e21523b195bb21a40144e30f1e163
   EXSplashScreen: 845290df0d2730fdedc59ee6ce3b959d8079a350
   EXWebBrowser: 37388663fa51cbfc883de2244931a5182d948e5f

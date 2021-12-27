@@ -16,7 +16,6 @@ import {
 
 import Layout from "../constants/Layout";
 import Slide, { Slides } from "./Slide";
-import { HeadingText } from "./StyledText";
 import { ScrollView } from "react-native-gesture-handler";
 
 const SLIDES = [Slides.Slide1, Slides.Slide2, Slides.Slide3, Slides.Slide4];
@@ -87,9 +86,6 @@ function Carousel() {
             />
           ))}
       </ScrollView>
-      <View style={styles.logo}>
-        <HeadingText style={styles.logoText}>MidCentury.</HeadingText>
-      </View>
     </View>
   );
 }
@@ -103,14 +99,5 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-  },
-  logo: {
-    position: "absolute",
-    top: 60,
-    left: 20,
-    fontSize: 30,
-  },
-  logoText: {
-    fontSize: 20,
   },
 });

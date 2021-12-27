@@ -13,6 +13,7 @@ const menuData: TMenu[] = [
   { id: 1, name: "Pinch Gesture", route: "PinchGesture", emoji: "🤌" },
   { id: 2, name: "Swipe to dismiss", route: "SwipeDelete", emoji: "💨" },
   { id: 3, name: "Carousel", route: "Carousel", emoji: "🎪" },
+  { id: 4, name: "Swip to confirm", route: "SwipeToConfirm", emoji: "👆" },
 ];
 
 export default function TabOneScreen() {
